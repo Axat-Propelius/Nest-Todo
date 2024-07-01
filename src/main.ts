@@ -3,10 +3,6 @@ import 'dotenv/config';
 import { CustomValidationPipe } from './filters/custom-validation.pipe';
 import { AppModule } from './app.module';
 import { urlencoded } from 'express';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { getUId } from './utils/common.helper';
-import { UserModel } from './db/models/user.model';
-import { hashSync } from 'bcryptjs';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -36,32 +32,4 @@ bootstrap();
 
 // knex seed:run --env local
 
-(async () => {
-  const userData = [
-    {
-      userID: getUId(),
-      username: 'Axat Developer',
-      emailID: 'axat.sachani+user@propelius.tech',
-      password: hashSync('Axat@2024', 10),
-      roleID: 3,
-    },
-    {
-      userID: getUId(),
-      username: 'Axat Administrator',
-      emailID: 'axat.sachani+admin@propelius.tech',
-      password: hashSync('Axat@2024', 10),
-      roleID: 1,
-    },
-    {
-      userID: getUId(),
-      username: 'Axat Manager',
-      emailID: 'axat.sachani+manager@propelius.tech',
-      password: hashSync('Axat@2024', 10),
-      roleID: 2,
-    },
-  ];
-
-  // const data = await UserModel.query().insert(userData);
-  // console.log(data);
-  
-})();
+process.on('uncaughtException', (err) => console.log(err));
