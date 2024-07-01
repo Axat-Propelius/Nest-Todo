@@ -1,6 +1,6 @@
 import { Model } from 'objection';
 import { getUId } from 'src/utils/common.helper';
-import { RoleModel } from './role.model';
+import { type RoleModel } from './role.model';
 
 export class UserModel extends Model {
   static tableName: string = 'users';
@@ -15,8 +15,8 @@ export class UserModel extends Model {
   roleID: number;
   role: RoleModel;
   isUser: boolean;
-  createdAt: Date;
-  updateAt: Date;
+  created_at: Date;
+  updated_at: Date;
 
   static get jsonSchema() {
     return {
@@ -42,7 +42,7 @@ export class UserModel extends Model {
     };
   }
 
-  static get relationMappings() {
+  static relationMappings() {
     const { RoleModel } = require('./role.model');
 
     return {

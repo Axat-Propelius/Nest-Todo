@@ -1,5 +1,6 @@
 import { Model } from 'objection';
 import { getUId } from 'src/utils/common.helper';
+import { type UserModel } from './user.model';
 
 export enum TodoStatus {
   PENDING = 'pending',
@@ -14,13 +15,14 @@ export class TodoModel extends Model {
   id: number;
   todoID: string;
   userID: string;
+  user: UserModel;
   title: string;
   description: string;
   dueDate: Date;
   status: string; //TodoStatus;
   isCompleted: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  created_at: Date;
+  updated_at: Date;
 
   static get jsonSchema() {
     return {
@@ -50,7 +52,7 @@ export class TodoModel extends Model {
     };
   }
 
-  static get relationMappings() {
+  static relationMappings() {
     // const { UserModel } = require('src/db/models/user.model');
     const { UserModel } = require('./user.model');
     return {
@@ -58,9 +60,10 @@ export class TodoModel extends Model {
         relation: Model.BelongsToOneRelation,
         modelClass: UserModel,
         join: {
-          from: `${TodoModel.tableName}.${TodoModel.idColumn}`,
-          to: `${UserModel.tableName}.${TodoModel.idColumn}`,
+          from: `${TodoModel.tableName}.userID`,
+          to: `${UserModel.tableName}.${UserModel.idColumn}`,
         },
+        filter: (query) => query.select('username', 'userID', 'emailID','roleID'),
       },
     };
   }

@@ -13,6 +13,9 @@ export class RoleService {
   }
 
   async getAllRoles() {
-    return this.roleModel.query().select('*');
+    return this.roleModel
+      .query()
+      .select('name', 'slug', 'id')
+      .withGraphJoined('[users]');
   }
 }

@@ -54,6 +54,7 @@ export class TodoService {
       const todo = await this.todoModel
         .query()
         .findOne(findQuery)
+        .withGraphJoined('[user.role]')
         .select(
           'todoID',
           'title',
