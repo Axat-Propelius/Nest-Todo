@@ -1,0 +1,172 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/": {
+      "get": {
+        "operationId": "AppController_getHello",
+        "parameters": [],
+        "responses": { "200": { "description": "" } }
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "operationId": "AuthController_register",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/RegisterDto" }
+            }
+          }
+        },
+        "responses": { "201": { "description": "" } }
+      }
+    },
+    "/auth/register-manager": {
+      "post": {
+        "operationId": "AuthController_registerManager",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/RegisterDto" }
+            }
+          }
+        },
+        "responses": { "201": { "description": "" } },
+        "security": [{ "access-token": [] }]
+      }
+    },
+    "/auth/register-admin": {
+      "post": {
+        "operationId": "AuthController_registerAdmin",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/RegisterDto" }
+            }
+          }
+        },
+        "responses": { "201": { "description": "" } },
+        "security": [{ "access-token": [] }]
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "operationId": "AuthController_login",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/LoginDto" }
+            }
+          }
+        },
+        "responses": { "201": { "description": "" } }
+      }
+    },
+    "/user": {
+      "get": {
+        "operationId": "UsersController_getProfile",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "security": [{ "access-token": [] }]
+      }
+    },
+    "/todo/admin": {
+      "get": {
+        "operationId": "TodoController_getAdminTodoList",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "security": [{ "access-token": [] }]
+      }
+    },
+    "/todo": {
+      "get": {
+        "operationId": "TodoController_getTodoList",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "security": [{ "access-token": [] }]
+      },
+      "post": {
+        "operationId": "TodoController_cerateTodo",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/TodoCreateDto" }
+            }
+          }
+        },
+        "responses": { "201": { "description": "" } },
+        "security": [{ "access-token": [] }]
+      }
+    },
+    "/todo/{todoID}": {
+      "get": {
+        "operationId": "TodoController_getTodoById",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "security": [{ "access-token": [] }]
+      },
+      "patch": {
+        "operationId": "TodoController_updateTodo",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/TodoUpdateDto" }
+            }
+          }
+        },
+        "responses": { "200": { "description": "" } },
+        "security": [{ "access-token": [] }]
+      },
+      "delete": {
+        "operationId": "TodoController_deleteTodo",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "security": [{ "access-token": [] }]
+      }
+    },
+    "/roles": {
+      "get": {
+        "operationId": "RoleController_getRoles",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "security": [{ "access-token": [] }]
+      }
+    }
+  },
+  "info": {
+    "title": "Todo Application",
+    "description": "Todo Application API",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "access-token": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      },
+      "admin-basic-auth": { "type": "http", "scheme": "basic" }
+    },
+    "schemas": {
+      "RegisterDto": { "type": "object", "properties": {} },
+      "LoginDto": { "type": "object", "properties": {} },
+      "TodoCreateDto": { "type": "object", "properties": {} },
+      "TodoUpdateDto": { "type": "object", "properties": {} }
+    }
+  }
+}
