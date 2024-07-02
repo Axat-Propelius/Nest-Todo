@@ -2,6 +2,8 @@ import type { Knex } from 'knex';
 import { onUpdateTrigger } from '../utils';
 
 export async function up(knex: Knex): Promise<void> {
+  await knex.raw('CREATE DATABASE todo');
+
   await knex.transaction(async (trx) => {
     await trx.schema
       .createTable('users', (table) => {
@@ -21,5 +23,7 @@ export async function up(knex: Knex): Promise<void> {
 }
 
 export async function down(knex: Knex): Promise<void> {
+  await knex.raw('DROP DATABASE todo');
+
   await knex.schema.dropTableIfExists('users');
 }
