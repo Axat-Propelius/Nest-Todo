@@ -52,3 +52,4 @@ bootstrap();
 // knex seed:run --env local
 
 process.on('uncaughtException', (err) => console.log(err));
+
