@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { TodoModel } from 'src/db/models/todo.model';
-import { TodoIdsDto } from './todo.dto';
+import { TodoIdsDto, TodoUpdateDto } from './todo.dto';
 import { SUCCESS_MESSAGES } from 'src/constants/success.messages';
 import { Transaction } from 'objection';
 import { ERROR_MESSAGES } from 'src/constants/error.messages';
@@ -97,36 +97,23 @@ export class TodoService {
 
   async updateTodoByID(
     query: TodoIdsDto,
-    update: Partial<TodoModel>,
+    update: TodoUpdateDto,
     isUser: boolean,
     trx?: Transaction,
   ) {
     try {
-      const todo = await this.todoModel
-        .query(trx)
-        .patchAndFetchById(query.todoID, update)
-        .select(
-          'todoID',
-          'title',
-          'description',
-          'dueDate',
-          'isCompleted',
-          'status',
-          'created_at',
-          'updated_at',
-        );
-      if (!todo)
-        throw new HttpException(
-          ERROR_MESSAGES.TODO_NOT_FOUND,
-          HttpStatus.NOT_FOUND,
-        );
+      const todo = await this.getTodoByID(query, isUser);
+
+      await todo.data.$query().patchAndFetch(update);
+
       return {
         message: SUCCESS_MESSAGES.TODO_UPDATED,
         success: true,
         statusCode: HttpStatus.OK,
-        data: todo,
       };
     } catch (error) {
+      console.log(error);
+
       throw new HttpException(error.message, error.status);
     }
   }

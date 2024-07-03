@@ -11,9 +11,19 @@ import { ResponseInterceptor } from './interceptors/response.interceptor';
 import { AllExceptionFilter } from './filters/all-exceptions.filter';
 import { NormalExceptionFilter } from './filters/normal-exception.filter';
 import { ValidationExceptionFilter } from './filters/validator-exception.filter';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [AuthModule, UsersModule, TodoModule, RoleModule],
+  imports: [
+    ConfigModule.forRoot({
+      envFilePath: '.env',
+      isGlobal: true,
+    }),
+    AuthModule,
+    UsersModule,
+    TodoModule,
+    RoleModule,
+  ],
   controllers: [AppController],
   providers: [
     AppService,

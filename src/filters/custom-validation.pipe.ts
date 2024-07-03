@@ -47,7 +47,6 @@ export class CustomValidationPipe implements PipeTransform {
     for (const error of errors) {
       if (error.constraints) {
         const firstErrorKey = Object.keys(error.constraints)[0];
-        console.log('log from pipe :: ' + error.constraints[firstErrorKey]);
         throw new HttpException(error.constraints[firstErrorKey], 400);
       }
       if (error.children && error.children.length > 0) {

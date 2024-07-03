@@ -31,7 +31,7 @@ export class AuthController {
   async registerAdmin(@Body() body: RegisterDto) {
     return await this.authService.registerAdmin(body);
   }
-  
+
   @Post('login')
   async login(@Body() body: LoginDto) {
     return this.authService.login(body);

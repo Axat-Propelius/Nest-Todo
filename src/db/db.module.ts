@@ -5,7 +5,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UserModel } from './models/user.model';
 import { TodoModel } from './models/todo.model';
 
-const models = [UserModel,TodoModel];
+const models = [UserModel, TodoModel];
 
 @Module({
   imports: [
@@ -29,4 +29,3 @@ const models = [UserModel,TodoModel];
   exports: [ObjectionModule],
 })
 export class DatabaseModule {}
-

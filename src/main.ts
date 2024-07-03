@@ -1,5 +1,4 @@
 import { NestFactory } from '@nestjs/core';
-import 'dotenv/config';
 import { CustomValidationPipe } from './filters/custom-validation.pipe';
 import { AppModule } from './app.module';
 import { urlencoded } from 'express';
@@ -52,4 +51,3 @@ bootstrap();
 // knex seed:run --env local
 
 process.on('uncaughtException', (err) => console.log(err));
-

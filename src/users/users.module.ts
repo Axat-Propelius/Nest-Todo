@@ -8,9 +8,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
-    ObjectionModule.forFeature([
-      UserModel
-    ]),
+    ObjectionModule.forFeature([UserModel]),
     JwtModule.registerAsync({
       imports: [ConfigModule],
       useFactory: async (configService) => ({

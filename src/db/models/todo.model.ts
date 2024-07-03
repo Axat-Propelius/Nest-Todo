@@ -19,7 +19,7 @@ export class TodoModel extends Model {
   title: string;
   description: string;
   dueDate: Date;
-  status: string; //TodoStatus;
+  status: TodoStatus;
   isCompleted: boolean;
   created_at: Date;
   updated_at: Date;
@@ -63,7 +63,8 @@ export class TodoModel extends Model {
           from: `${TodoModel.tableName}.userID`,
           to: `${UserModel.tableName}.${UserModel.idColumn}`,
         },
-        filter: (query) => query.select('username', 'userID', 'emailID','roleID'),
+        filter: (query) =>
+          query.select('username', 'userID', 'emailID', 'roleID'),
       },
     };
   }

@@ -64,5 +64,5 @@ export class TodoUpdateDto {
       'status must be one of the following values: ' +
       Object.values(TodoStatus).join(', '),
   })
-  status: string;
+  status: TodoStatus;
 }

@@ -1,4 +1,3 @@
-
 import { Model } from 'objection';
 import knex from './knex';
 

@@ -1,4 +1,4 @@
-#!/bin/bash
+!/bin/bash
 
 # URL of the JSON data
 url="http://localhost:3000/api-docs-json"
